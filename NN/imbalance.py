@@ -103,10 +103,10 @@ def f1_score(y_true, y_pred, num_classes):
 
 def compute_metrics(val_dataloader, model, base_probabilities, config):
     y_true, y_pred, _ = evaluate_loop(val_dataloader, model, base_probabilities, config)
-    print('Per-class accuracy: ', per_class_accuracy(y_true, y_pred, num_classes=6))
-    print('Precision: ', precision(y_true, y_pred, num_classes=6))
-    print('Recall: ', recall(y_true, y_pred, num_classes=6))
-    print('F1-score: ', f1_score(y_true, y_pred, num_classes=6))
+    print('Per-class accuracy: ', [round(value, 4) for value in per_class_accuracy(y_true, y_pred, num_classes=6)])
+    print('Precision: ', [round(value, 4) for value in precision(y_true, y_pred, num_classes=6)])
+    print('Recall: ', [round(value,4) for value in recall(y_true, y_pred, num_classes=6)])
+    print('F1-score: ', [round(value,4) for value in f1_score(y_true, y_pred, num_classes=6)])
 
 
 # run to get the metrics on a model saved by a checkpoint for a specific model
@@ -120,8 +120,7 @@ if __name__ == '__main__':
         'momentum': 0.9,                  # momentum 
 
         'plot_name': 'MSCAD_unweighted',
-        # 'ckpt_path': 'checkpoints/unweighted',  # directory to save our model checkpoints
-        'ckpt_path': 'checkpoints/logit_adj_data_full',  # directory to save our model checkpoints
+        'ckpt_path': 'checkpoints/unweighted',  # directory to save our model checkpoints
 
 
         # 'plot_name': 'MSCAD_weighted',

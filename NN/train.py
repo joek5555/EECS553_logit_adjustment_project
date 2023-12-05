@@ -79,7 +79,9 @@ def train(config, model, train_loader, val_loader, base_probabilities):
     if 'use_weighted_loss' not in config:
         criterion = torch.nn.CrossEntropyLoss()
     else:
-        criterion = torch.nn.CrossEntropyLoss(weight = torch.tensor([1.0, 1.0, 1.0, 1.0, 100.0, 1.0]))
+        # weight the loss funtion using the reciprocal of the base probabilities
+        # this ensures that labels that occur less frequently are weighted more
+        criterion = torch.nn.CrossEntropyLoss(weight = (1/base_probabilities).to(torch.float32))
 
 
     learning_rate = config['learning_rate']
