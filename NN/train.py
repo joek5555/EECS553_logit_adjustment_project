@@ -6,7 +6,7 @@ import os
 from model import FullConnectNN
 import random
 from plot import Plotter
-import NN.checkpoint as checkpoint
+import checkpoint as checkpoint
 from dataset import MSCAD
 
 torch.manual_seed(0)
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     config = {
         'data_path': 'data',
         'batch_size': 100,
-        'num_epoch': 25,                 # number of epochs for training
+        'num_epoch': 100,                 # number of epochs for training
         'learning_rate': 1e-3,           # learning rate
         'momentum': 0.9,                  # momentum 
 

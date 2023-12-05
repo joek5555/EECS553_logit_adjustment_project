@@ -6,7 +6,7 @@ import torch
 from model import FullConnectNN
 import numpy as np
 import os
-import NN.checkpoint as checkpoint
+import checkpoint as checkpoint
 
 def per_class_accuracy(y_true, y_pred, num_classes):
     """
