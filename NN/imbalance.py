@@ -11,6 +11,7 @@ import checkpoint as checkpoint
 def per_class_accuracy(y_true, y_pred, num_classes):
     """
     Compute the per-class accuracy given true and predicted labels.
+    Accuracy = (TP+TN)/(TP+TN+FP+FN)
     Inputs:
         - y_true: true labels, tensor with shape=(num_examples)
         - y_pred: predicted labels, tensor with shape=(num_examples)
@@ -22,9 +23,9 @@ def per_class_accuracy(y_true, y_pred, num_classes):
     for class_num in range(num_classes):
         y_pred_mask = (y_pred == class_num).int()
         y_true_mask = (y_true == class_num).int()
-        num_right = torch.count_nonzero((torch.logical_and(y_pred_mask, y_true_mask)).int()).item()
-        num_total = torch.count_nonzero(y_true_mask).item()
-        per_class_acc.append(num_right/num_total)
+        TP_and_TN = torch.count_nonzero((y_pred_mask == y_true_mask).int()).item()
+        num_total = y_true.shape[0]
+        per_class_acc.append(TP_and_TN/num_total)
 
     return per_class_acc
 
